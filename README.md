@@ -1,8 +1,8 @@
 # Quicksort
 
-I implemented my own Quicksort algorithm in Ruby. Quicksort takes O(n * log n) on average and
-O(n^2) in the worst case scenario. For space complexity, it takes O(n) space, so I improved
-it to O(log n) space by partitioning my array.
+I implemented my own Quicksort algorithm in Ruby. Quicksort takes O(n * log n) time on average and
+O(n^2) in the worst case scenario. For space complexity, it takes O(n) space. I improved it slightly
+with an in-place partitioning algorithm that doesn't create any extra arrays. Space complexity is still O(n).
 
 ## Partitioning
 
@@ -26,7 +26,7 @@ of the pivot. This was done via simple array index swapping:
   end
 ```
 
-Next, I recursively sorted the left hand side and the right hand side, which would give me my final array. 
+Next, I recursively sorted the left hand side and the right hand side, which would give me my final array.
 
 ```ruby
 sort2!(array, start, left_length, &prc)  
@@ -34,3 +34,10 @@ sort2!(array, pivot_idx + 1, right_length, &prc)
 
 array
 ```
+
+
+## Future plans
+
+To improve space complexity to O(log n) instead of O(n), I need to use tail recursion. I would recursively
+sort the smaller sized partition, which takes a max of O(log n) stack frames, and use tail recursion on the
+bigger sized partition, which does not add to the call stack. 
