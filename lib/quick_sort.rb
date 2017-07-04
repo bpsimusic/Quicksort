@@ -1,7 +1,6 @@
-
+# Quick sort has average case time complexity O(nlogn), but worst
+# case O(n**2).
 class QuickSort
-   # Quick sort has average case time complexity O(nlogn), but worst
-   # case O(n**2).
 
    # Not in-place. Uses O(n) memory.
    def self.sort1(array)
@@ -31,10 +30,10 @@ class QuickSort
 
     pivot_idx = partition(array, start, length, &prc)
 
-    left_size = pivot_idx - start     #take the left side size
-    right_size = length - (left_size + 1)   #take the right side size
-    sort2!(array, start, left_size, &prc)  #Recursively sort the left side
-    sort2!(array, pivot_idx + 1, right_size, &prc)  #Recursively sort the right side
+    left_length = pivot_idx - start     #take the left side size
+    right_length = length - (left_length + 1)   #take the right side size
+    sort2!(array, start, left_length, &prc)  #Recursively sort the left side
+    sort2!(array, pivot_idx + 1, right_length, &prc)  #Recursively sort the right side
 
     array
   end
@@ -46,7 +45,7 @@ class QuickSort
     pivot = array[start]   #the pivot is the partition barrier. Everything to left is smaller, everything to right is bigger.
     pivot_idx = start
 
-    ((start+1)...(start + length)).each do |idx|
+    ((start+1)..(start + (length-1))).each do |idx|
       val = array[idx]
       if prc.call(pivot, val) < 1
         #pivot is smaller than the value
@@ -56,7 +55,6 @@ class QuickSort
         #every time you make a swap the pivot with a smaller element, the smaller
         #element needs to go to the left of the pivot. The order of elements on the right hand
         #side don't matter, same goes for the left hand side.
-
 
         array[idx] = array[pivot_idx + 1] #move the element in the immediate right of the pivot to the current index's place
         array[pivot_idx + 1] = pivot #move the pivot up one space.
